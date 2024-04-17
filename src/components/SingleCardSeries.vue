@@ -29,7 +29,7 @@ export default{
 
 <template>
     <li @mouseenter.prevent="visible = false" @mouseleave.prevent="visible = true" class="series-card">
-        <img v-if="series.poster_path !== null && visible === true" :src="'https://image.tmdb.org/t/p/w342' + series.poster_path" alt="locandina">
+        <img v-if="series.poster_path !== null && visible === true" :src="'https://image.tmdb.org/t/p/w342' + series.poster_path" :alt="series.name">
         <div class="info-wrapper-series">
             <h3>
                 <span>Nome serie: </span>

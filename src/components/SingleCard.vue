@@ -29,7 +29,7 @@ export default{
 
 <template>
     <li @mouseenter.prevent="visible = false" @mouseleave.prevent="visible = true" class="card">
-        <img v-if="movie.poster_path !== null && visible === true" :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" alt="locandina">
+        <img v-if="movie.poster_path !== null && visible === true" :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" :alt="movie.title">
         <div class="info-wrapper">
             <h3>
                 <span>Titolo:</span>
