@@ -85,7 +85,7 @@ export default{
         }
         .star-point i{
             color: yellow;
-            .no-point{
+            &.no-point{
                 color: grey;
             }
         }
