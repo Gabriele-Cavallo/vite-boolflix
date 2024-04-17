@@ -10,8 +10,8 @@ import SingleCard from './SingleCard.vue';
 
 <template>
     <section class="cards-container">   
-        <div class="contaier">
-            <ul>
+        <div class="container">
+            <ul class="d-flex d-wrap">
                 <SingleCard></SingleCard>
                 <SingleCard></SingleCard>
                 <SingleCard></SingleCard>
@@ -36,5 +36,6 @@ import SingleCard from './SingleCard.vue';
 
 .cards-container{
     background-color: #434343;
+    padding: 40px 0;
 }
 </style>
