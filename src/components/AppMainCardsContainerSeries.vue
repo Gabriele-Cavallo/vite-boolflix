@@ -1,10 +1,10 @@
 <script>
 import { store } from '../store.js';
-import SingleCard from './SingleCard.vue';
+import SingleCardSeries from './SingleCardSeries.vue';
     export default{
-        name: 'AppMainCardsContainer',
+        name: 'AppMainCardsContainerSeries',
         components:{
-            SingleCard,
+            SingleCardSeries,
         },
         data(){
             return {
@@ -17,9 +17,9 @@ import SingleCard from './SingleCard.vue';
 <template>
     <section class="cards-container">   
         <div class="container">
-            <h2>MOVIES</h2>
+            <h2>SERIES</h2>
             <ul class="d-flex d-wrap">
-                <SingleCard v-for="movie in store.moviesList" :key="movie.id" :movie="movie"></SingleCard>
+                <SingleCardSeries v-for="series in store.seriesList" :key="series.id" :series="series"></SingleCardSeries>
             </ul>
         </div>
     </section>

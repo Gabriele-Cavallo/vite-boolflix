@@ -3,11 +3,13 @@
     import { store } from './store.js';
     import AppHeader from './components/AppHeader.vue';
     import AppMainCardsContainer from './components/AppMainCardsContainer.vue';
+    import AppMainCardsContainerSeries from './components/AppMainCardsContainerSeries.vue';
 
 export default{
     components: {
         AppHeader,
         AppMainCardsContainer,
+        AppMainCardsContainerSeries,
     },
     data (){
     return{
@@ -28,6 +30,15 @@ export default{
             .then((response) => {
                 this.store.moviesList = response.data.results;
             })
+            if (store.searchedFilm !== ''){
+                queryParams.query = store.searchedFilm;
+            }
+            axios.get ('https://api.themoviedb.org/3/search/tv', {
+                params: queryParams
+            })
+            .then((response) => {
+                this.store.seriesList = response.data.results;
+            })
         }
     },
     mounted (){
@@ -40,6 +51,7 @@ export default{
     <AppHeader @search="getInfoFromAPI"></AppHeader>
     <main>
         <AppMainCardsContainer></AppMainCardsContainer>
+        <AppMainCardsContainerSeries></AppMainCardsContainerSeries>
     </main>
 </template>
 

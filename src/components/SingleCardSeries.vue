@@ -2,22 +2,22 @@
 import LanguageFlag from './LanguageFlag.vue';
 
 export default{
-    name: 'SingleCard',
+    name: 'SingleCardSeries',
     components:{
         LanguageFlag,
     },
     props: {
-        movie: Object,
+        series: Object,
     },
 }
 </script>
 
 <template>
     <li class="card">
-        <h3>{{ movie.title }}</h3>
-        <div>{{ movie.original_title }}</div>
-            <LanguageFlag :language="movie.original_language"></LanguageFlag>
-        <div>{{ movie.vote_average }}</div>
+        <h3>{{ series.name }}</h3>
+        <div>{{ series.original_name }}</div>
+            <LanguageFlag :language="series.original_language"></LanguageFlag>
+        <div>{{ series.vote_average }}</div>
     </li>
 </template>
 
