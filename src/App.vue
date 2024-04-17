@@ -1,15 +1,21 @@
 <script>
     import axios from 'axios';
     import { store } from './store.js';
+    import AppHeader from './components/AppHeader.vue';
 
 export default{
+    components: {
+        AppHeader,
+    },
     data (){
     return{
         store
     }
     },
     methods: {
-
+        getInfoFromAPI(){
+            alert('ciao sono un alert')
+        }
     },
     mounted (){
 
@@ -18,17 +24,12 @@ export default{
 </script>
 
 <template>
-    <div class="container">
-        <h1>ciao sono appvue</h1> 
-    </div>
+    <AppHeader @search="getInfoFromAPI"></AppHeader>
 </template>
 
 <style lang="scss">
     @use './style/generic';
-    @use './style/partials/variables' as *;
 
-h1{
-    color: $primary-color;
-}
+
 
 </style>
