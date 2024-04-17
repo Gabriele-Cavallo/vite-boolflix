@@ -1,17 +1,22 @@
 <script>
+import LanguageFlag from './LanguageFlag.vue';
+
 export default{
     name: 'SingleCard',
+    components:{
+        LanguageFlag,
+    },
     props: {
         movie: Object,
-    }
+    },
 }
 </script>
 
 <template>
     <li class="card">
         <h2>{{ movie.title }}</h2>
-        <h3>{{ movie.original_title }}</h3>
-        <div>{{ movie.original_language }}</div>
+        <div>{{ movie.original_title }}</div>
+            <LanguageFlag :language="movie.original_language"></LanguageFlag>
         <div>{{ movie.vote_average }}</div>
     </li>
 </template>
@@ -30,6 +35,9 @@ export default{
     padding: 20px 0;
     list-style: none;
     color: white;
+    *{
+        margin-bottom: 10px;
+    }
     h2{
         text-transform: uppercase;
     }
