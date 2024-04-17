@@ -12,6 +12,7 @@ export default{
     data(){
         return{
             score: null,
+            visible: true,
         }
     },
     methods: {
@@ -27,14 +28,27 @@ export default{
 </script>
 
 <template>
-    <li class="series-card">
-        <img :src="'https://image.tmdb.org/t/p/w342' + series.poster_path" alt="locandina">
-        <h3>{{ series.name }}</h3>
-        <div>{{ series.original_name }}</div>
-        <LanguageFlag :language="series.original_language"></LanguageFlag>
-        <div class="star-point-series">
-            <i v-for="star in score" class="fa-solid fa-star"></i>
-            <i v-for="star in (5 - score)" class="fa-solid fa-star no-point"></i>
+    <li @mouseenter.prevent="visible = false" @mouseleave.prevent="visible = true" class="series-card">
+        <img v-if="series.poster_path !== null && visible === true" :src="'https://image.tmdb.org/t/p/w342' + series.poster_path" alt="locandina">
+        <div class="info-wrapper-series">
+            <h3>
+                <span>Nome serie: </span>
+                {{ series.name }}
+            </h3>
+            <div>
+                <span>Nome originale: </span>
+                {{ series.original_name }}
+            </div>
+            <LanguageFlag :language="series.original_language"></LanguageFlag>
+            <div class="star-point-series">
+                <span>Voto: </span>
+                <i v-for="star in score" class="fa-solid fa-star"></i>
+                <i v-for="star in (5 - score)" class="fa-solid fa-star no-point"></i>
+            </div>
+            <p>
+                <span>Overview: </span>
+                {{ series.overview }}
+            </p>
         </div>
     </li>
 </template>
@@ -49,25 +63,31 @@ export default{
     width: calc((100% / 4) - 20px);
     height: 600px;
     margin: 10px;
-    text-align: center;
     list-style: none;
     color: white;
     overflow: hidden;
-    *{
-        margin-bottom: 10px;
-    }
-    h3{
-        text-transform: uppercase;
-    }
     img{
         width: 100%;
-        height: 75%;
+        height: 100%;
         display: block;
     }
-    .star-point-series{
-        color: yellow;
-        .no-point{
-            color: grey;
+    .info-wrapper-series{
+        padding: 40px 20px;
+        *{
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        span{
+            font-weight: bold;
+        }
+        h3{
+            text-transform: uppercase;
+        }
+        .star-point-series i{
+            color: yellow;
+            .no-point{
+                color: grey;
+            }
         }
     }
 }

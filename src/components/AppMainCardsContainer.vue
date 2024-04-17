@@ -31,10 +31,10 @@ import SingleCard from './SingleCard.vue';
 .cards-container{
     background-color: #434343;
     padding: 40px 0;
-    text-align: center;
     color: $primary-color;
     .container{
         h2{
+            text-align: center;
             font-size: 30px;
         }
     }
