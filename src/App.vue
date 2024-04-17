@@ -16,7 +16,18 @@ export default{
     },
     methods: {
         getInfoFromAPI(){
-            alert('ciao sono un alert')
+            const queryParams = {
+                api_key: 'ea69b58888f2a2d02844968480d9cddb',
+            };
+            if (store.searchedFilm !== ''){
+                queryParams.query = store.searchedFilm;
+            }
+            axios.get ('https://api.themoviedb.org/3/search/movie', {
+                params: queryParams
+            })
+            .then((response) => {
+                this.store.moviesList = response.data.results;
+            })
         }
     },
     mounted (){

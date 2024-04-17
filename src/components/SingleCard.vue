@@ -1,16 +1,19 @@
 <script>
 export default{
     name: 'SingleCard',
+    props: {
+        movie: Object,
+    }
 }
 </script>
 
 <template>
-    <div class="card">
-        <h2>[title]</h2>
-        <h3>[original-title]</h3>
-        <div>[language]</div>
-        <div>[vote]</div>
-    </div>
+    <li class="card">
+        <h2>{{ movie.title }}</h2>
+        <h3>{{ movie.original_title }}</h3>
+        <div>{{ movie.original_language }}</div>
+        <div>{{ movie.vote_average }}</div>
+    </li>
 </template>
 
 <style scoped lang="scss">
@@ -25,5 +28,10 @@ export default{
     margin: 10px;
     text-align: center;
     padding: 20px 0;
+    list-style: none;
+    color: white;
+    h2{
+        text-transform: uppercase;
+    }
 }
 </style>

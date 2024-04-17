@@ -1,9 +1,15 @@
 <script>
+import { store } from '../store.js';
 import SingleCard from './SingleCard.vue';
     export default{
         name: 'AppMainCardsContainer',
         components:{
             SingleCard,
+        },
+        data(){
+            return {
+                store,
+            }
         }
     }
 </script>
@@ -12,20 +18,7 @@ import SingleCard from './SingleCard.vue';
     <section class="cards-container">   
         <div class="container">
             <ul class="d-flex d-wrap">
-                <SingleCard></SingleCard>
-                <SingleCard></SingleCard>
-                <SingleCard></SingleCard>
-                <SingleCard></SingleCard>
-                <SingleCard></SingleCard>
-                <SingleCard></SingleCard>
-                <SingleCard></SingleCard>
-                <SingleCard></SingleCard>
-                <SingleCard></SingleCard>
-                <SingleCard></SingleCard>
-                <SingleCard></SingleCard>
-                <SingleCard></SingleCard>
-                <SingleCard></SingleCard>
-                <SingleCard></SingleCard>
+                <SingleCard v-for="movie in store.moviesList" :key="movie.id" :movie="movie"></SingleCard>
             </ul>
         </div>
     </section>
