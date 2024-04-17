@@ -4,12 +4,14 @@
     import AppHeader from './components/AppHeader.vue';
     import AppMainCardsContainer from './components/AppMainCardsContainer.vue';
     import AppMainCardsContainerSeries from './components/AppMainCardsContainerSeries.vue';
+    import AppLoader from './components/AppLoader.vue';
 
 export default{
     components: {
         AppHeader,
         AppMainCardsContainer,
         AppMainCardsContainerSeries,
+        AppLoader,
     },
     data (){
     return{
@@ -23,22 +25,22 @@ export default{
             };
             if (store.searchedFilm !== ''){
                 queryParams.query = store.searchedFilm;
+                axios.get ('https://api.themoviedb.org/3/search/movie', {
+                    params: queryParams
+                })
+                .then((response) => {
+                    this.store.moviesList = response.data.results;
+                })
+                axios.get ('https://api.themoviedb.org/3/search/tv', {
+                    params: queryParams
+                })
+                .then((response) => {
+                    this.store.seriesList = response.data.results;
+                    store.loading = false;
+                })
+            }else{
+                store.loading = true;
             }
-            axios.get ('https://api.themoviedb.org/3/search/movie', {
-                params: queryParams
-            })
-            .then((response) => {
-                this.store.moviesList = response.data.results;
-            })
-            if (store.searchedFilm !== ''){
-                queryParams.query = store.searchedFilm;
-            }
-            axios.get ('https://api.themoviedb.org/3/search/tv', {
-                params: queryParams
-            })
-            .then((response) => {
-                this.store.seriesList = response.data.results;
-            })
         }
     },
     mounted (){
@@ -50,14 +52,19 @@ export default{
 <template>
     <AppHeader @search="getInfoFromAPI"></AppHeader>
     <main>
-        <AppMainCardsContainer></AppMainCardsContainer>
-        <AppMainCardsContainerSeries></AppMainCardsContainerSeries>
+        <AppLoader v-if="store.loading == true"></AppLoader>
+        <div v-if="store.loading == false">
+            <AppMainCardsContainer></AppMainCardsContainer>
+            <AppMainCardsContainerSeries></AppMainCardsContainerSeries>
+        </div>
     </main>
 </template>
 
 <style lang="scss">
     @use './style/generic';
 
-
+main{
+    height: calc(100vh - 130px);
+}
 
 </style>

@@ -27,6 +27,7 @@ header{
     padding: 40px;
     background-color: black;
     color: $primary-color;
+    min-height: 130px;
     .title{
         font-size: 30px;
         font-weight: bold;
