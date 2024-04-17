@@ -31,8 +31,11 @@ export default{
         <img :src="'https://image.tmdb.org/t/p/w342' + series.poster_path" alt="locandina">
         <h3>{{ series.name }}</h3>
         <div>{{ series.original_name }}</div>
-            <LanguageFlag :language="series.original_language"></LanguageFlag>
-        <div>{{ score }}</div>
+        <LanguageFlag :language="series.original_language"></LanguageFlag>
+        <div class="star-point-series">
+            <i v-for="star in score" class="fa-solid fa-star"></i>
+            <i v-for="star in (5 - score)" class="fa-solid fa-star no-point"></i>
+        </div>
     </li>
 </template>
 
@@ -60,6 +63,12 @@ export default{
         width: 100%;
         height: 75%;
         display: block;
+    }
+    .star-point-series{
+        color: yellow;
+        .no-point{
+            color: grey;
+        }
     }
 }
 </style>

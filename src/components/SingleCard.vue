@@ -31,8 +31,11 @@ export default{
         <img :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" alt="locandina">
         <h3>{{ movie.title }}</h3>
         <div>{{ movie.original_title }}</div>
-            <LanguageFlag :language="movie.original_language"></LanguageFlag>
-        <div>{{score}}</div>
+        <LanguageFlag :language="movie.original_language"></LanguageFlag>
+        <div class="star-point">
+            <i v-for="star in score" class="fa-solid fa-star"></i>
+            <i v-for="star in (5 - score)" class="fa-solid fa-star no-point"></i>
+        </div>
     </li>
 </template>
 
@@ -60,6 +63,12 @@ export default{
     }
     h3{
         text-transform: uppercase;
+    }
+    .star-point{
+        color: yellow;
+        .no-point{
+            color: grey;
+        }
     }
 }
 </style>
