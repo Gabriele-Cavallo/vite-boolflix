@@ -1,17 +1,40 @@
 <script>
+import SingleCard from './SingleCard.vue';
     export default{
         name: 'AppMainCardsContainer',
+        components:{
+            SingleCard,
+        }
     }
 </script>
 
 <template>
-    <h2>ciao sono un titolo</h2>
+    <section class="cards-container">   
+        <div class="contaier">
+            <ul>
+                <SingleCard></SingleCard>
+                <SingleCard></SingleCard>
+                <SingleCard></SingleCard>
+                <SingleCard></SingleCard>
+                <SingleCard></SingleCard>
+                <SingleCard></SingleCard>
+                <SingleCard></SingleCard>
+                <SingleCard></SingleCard>
+                <SingleCard></SingleCard>
+                <SingleCard></SingleCard>
+                <SingleCard></SingleCard>
+                <SingleCard></SingleCard>
+                <SingleCard></SingleCard>
+                <SingleCard></SingleCard>
+            </ul>
+        </div>
+    </section>
 </template>
 
 <style scoped lang="scss">
 @use '../style/partials/variables' as *;
 
-h2{
-    color: $primary-color;
+.cards-container{
+    background-color: #434343;
 }
 </style>

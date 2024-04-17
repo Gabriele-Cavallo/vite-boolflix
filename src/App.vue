@@ -27,7 +27,9 @@ export default{
 
 <template>
     <AppHeader @search="getInfoFromAPI"></AppHeader>
-    <AppMainCardsContainer></AppMainCardsContainer>
+    <main>
+        <AppMainCardsContainer></AppMainCardsContainer>
+    </main>
 </template>
 
 <style lang="scss">
