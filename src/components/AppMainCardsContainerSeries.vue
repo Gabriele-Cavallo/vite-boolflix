@@ -36,6 +36,8 @@ import SingleCardSeries from './SingleCardSeries.vue';
         h2{
         text-align: center;
         font-size: 30px;
+        margin: 40px 0;
+        font-size: 40px;
         }
     }
 }

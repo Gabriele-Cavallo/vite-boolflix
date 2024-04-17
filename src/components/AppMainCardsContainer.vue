@@ -35,7 +35,8 @@ import SingleCard from './SingleCard.vue';
     .container{
         h2{
             text-align: center;
-            font-size: 30px;
+            font-size: 40px;
+            margin: 40px 0;
         }
     }
 }
