@@ -33,6 +33,10 @@ import SingleCardSeries from './SingleCardSeries.vue';
     padding: 40px 0;
     text-align: center;
     color: $primary-color;
-    font-size: 30px;
+    .container{
+        h2{
+        font-size: 30px;
+        }
+    }
 }
 </style>

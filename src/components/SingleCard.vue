@@ -14,6 +14,7 @@ export default{
 
 <template>
     <li class="card">
+        <img :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" alt="locandina">
         <h3>{{ movie.title }}</h3>
         <div>{{ movie.original_title }}</div>
             <LanguageFlag :language="movie.original_language"></LanguageFlag>
@@ -32,11 +33,16 @@ export default{
     height: 600px;
     margin: 10px;
     text-align: center;
-    padding: 20px 0;
     list-style: none;
     color: white;
+    overflow: hidden;
     *{
         margin-bottom: 10px;
+    }
+    img{
+        width: 100%;
+        height: 75%;
+        display: block;
     }
     h3{
         text-transform: uppercase;
