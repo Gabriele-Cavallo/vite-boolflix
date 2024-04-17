@@ -9,6 +9,20 @@ export default{
     props: {
         series: Object,
     },
+    data(){
+        return{
+            score: null,
+        }
+    },
+    methods: {
+        roundedScore(){
+           this.score = Math.ceil(this.series.vote_average / 2);
+           return this.score
+        }
+    },
+    mounted(){
+        this.roundedScore();
+    }
 }
 </script>
 
@@ -18,7 +32,7 @@ export default{
         <h3>{{ series.name }}</h3>
         <div>{{ series.original_name }}</div>
             <LanguageFlag :language="series.original_language"></LanguageFlag>
-        <div>{{ series.vote_average }}</div>
+        <div>{{ score }}</div>
     </li>
 </template>
 

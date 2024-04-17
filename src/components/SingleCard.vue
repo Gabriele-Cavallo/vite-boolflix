@@ -9,6 +9,20 @@ export default{
     props: {
         movie: Object,
     },
+    data(){
+        return{
+            score: null,
+        }
+    },
+    methods: {
+        roundedScore(){
+           this.score = Math.ceil(this.movie.vote_average / 2);
+           return this.score
+        }
+    },
+    mounted(){
+        this.roundedScore();
+    }
 }
 </script>
 
@@ -18,7 +32,7 @@ export default{
         <h3>{{ movie.title }}</h3>
         <div>{{ movie.original_title }}</div>
             <LanguageFlag :language="movie.original_language"></LanguageFlag>
-        <div>{{ movie.vote_average }}</div>
+        <div>{{score}}</div>
     </li>
 </template>
 
