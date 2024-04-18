@@ -29,6 +29,7 @@
                 :overview="movie.overview"
                 :voteAvarage="movie.vote_average"
                 :keyId="movie.id"
+                :genresId="movie.genre_ids"
                 >
                 </SingleCard>
             </ul>

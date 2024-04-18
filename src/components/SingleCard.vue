@@ -16,6 +16,7 @@ export default{
         overview: String,
         voteAvarage: Number,
         keyId: Number,
+        genresId: Array,
     },
     data(){
         return{
@@ -78,7 +79,7 @@ export default{
     <!-- Template della singola card generato per i film -->
 
     <!-- Quando il cursore entra nell'area della card l'immagine sparisce e compaiono le info del film -->
-    <li  @click="getActorsFromApi(keyId), getGenresFromApi(keyId)" @mouseenter.prevent="visible = false" @mouseleave.prevent="visible = true" :class="{'card-overflow' : visible === false}" class="card">
+    <li v-if="genresId.includes(store.filterChoice) || store.filterChoice === ''"  @click="getActorsFromApi(keyId), getGenresFromApi(keyId)" @mouseenter.prevent="visible = false" @mouseleave.prevent="visible = true" :class="{'card-overflow' : visible === false}" class="card">
         <!-- Locandina del film(se presente fra le info ricevute dall'API) -->
         <img v-if="posterPath !== null && visible === true" :src="'https://image.tmdb.org/t/p/w342' + posterPath" :alt="title">
         <!-- Sezione card per le info sul film -->

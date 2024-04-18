@@ -29,6 +29,7 @@ import SingleCard from './SingleCard.vue';
                 :overview="series.overview"
                 :voteAvarage="series.vote_average"
                 :keyId="series.id"
+                :genresId="series.genre_ids"
                 >
                 </SingleCard>
             </ul>

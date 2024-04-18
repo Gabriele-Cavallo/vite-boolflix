@@ -5,4 +5,7 @@ export const store = reactive({
     seriesList: [],
     searchedFilm: '',
     loading: true,
+    filterMoviesGenres: '',
+    filterSeriesGenres: '',
+    filterChoice: '',
 });

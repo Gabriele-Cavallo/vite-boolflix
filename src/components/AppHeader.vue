@@ -1,11 +1,39 @@
 <script>
+import axios from 'axios';
 import { store } from '../store.js';
+import GenresFilter from './GenresFilter.vue';
+
 export default{
     name: 'AppHeader',
+    components: {
+        GenresFilter,
+    },
     data(){
         return {
             store,
         }
+    },
+    methods:{
+        getGenresApi(){
+            const queryParams = {
+                api_key: 'ea69b58888f2a2d02844968480d9cddb',
+            };
+            axios.get('https://api.themoviedb.org/3/genre/movie/list', {
+                params: queryParams
+            })
+            .then((response) => {
+                store.filterMoviesGenres = response.data.genres;
+            })
+            axios.get('https://api.themoviedb.org/3/genre/tv/list', {
+                params: queryParams
+            })
+            .then((response) => {
+                store.filterSeriesGenres = response.data.genres;
+            })
+        },
+    },
+    mounted(){
+        this.getGenresApi();
     }
 }
 </script>
@@ -15,6 +43,7 @@ export default{
     <header class="d-flex jst-btwn algn-cntr">
         <div class="title">BOOLFLIX</div>
         <div class="search-menu">
+            <GenresFilter @changeGenresId="getInfoFromAPI"></GenresFilter>
             <!-- Input utente che regola la ricerca eseguita dalla funzione getInfoFromAPI 
             in base al valore di searchedFilm -->
             <input v-model="store.searchedFilm" type="text" placeholder="Cerca....">
