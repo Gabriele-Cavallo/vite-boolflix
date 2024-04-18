@@ -3,26 +3,19 @@
         name: 'LanguageFlag',
         props:{
             language: String
-        }
+        },
+        methods: {
+            getImageUrl(name) {
+                return new URL(`../assets/img/${name}.png`, import.meta.url).href;
+            }
+        },
     }
 </script>
 
 <template>
     <div class="flag">
-        <div v-if="language === 'it'">
-            <img src="../assets/img/it-flag.png" alt="bandiera italiana">
-        </div>
-        <div v-else-if="language === 'en'">
-            <img src="../assets/img/en-flag.png" alt="bandiera inglese">
-        </div>
-        <div v-else-if="language === 'fr'">
-            <img src="../assets/img/fr-flag.jpg" alt="bandiera francese">
-        </div>
-        <div v-else-if="language === 'de'">
-            <img src="../assets/img/de-flag.png" alt="bandiera tedesco">
-        </div>
-        <div v-else="language === 'de'">
-            {{ language }}
+        <div>
+            <img :src="getImageUrl(language)" :alt="`Language: ${language}`">
         </div>
     </div>
 </template>
