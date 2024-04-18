@@ -15,6 +15,8 @@
 <template>
     <div class="flag">
         <div>
+            <!-- Tramite la funzione getImageUrl genero l'URL della bandiera da visualizzare in
+            base al valore contenuto nella chiave original_language dell'API -->
             <img :src="getImageUrl(language)" :alt="`Language: ${language}`">
         </div>
     </div>

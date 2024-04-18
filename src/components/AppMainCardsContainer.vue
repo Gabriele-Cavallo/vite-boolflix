@@ -15,10 +15,12 @@ import SingleCard from './SingleCard.vue';
 </script>
 
 <template>
+    <!-- Contenitore delle card per i Film -->
     <section class="cards-container">   
         <div class="container">
             <h2>MOVIES</h2>
             <ul class="d-flex d-wrap">
+                <!-- Creo una card per ogni elemento che popola l'array moviesList -->
                 <SingleCard v-for="movie in store.moviesList" :key="movie.id" :movie="movie"></SingleCard>
             </ul>
         </div>

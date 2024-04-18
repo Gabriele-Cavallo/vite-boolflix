@@ -11,10 +11,14 @@ export default{
 </script>
 
 <template>
+    <!-- Header che contiene logo, input utente e tasto di ricerca -->
     <header class="d-flex jst-btwn algn-cntr">
         <div class="title">BOOLFLIX</div>
         <div class="search-menu">
+            <!-- Input utente che regola la ricerca eseguita dalla funzione getInfoFromAPI 
+            in base al valore di searchedFilm -->
             <input v-model="store.searchedFilm" type="text" placeholder="Cerca....">
+            <!-- Bottone che fa partire l'$emit ad AppVue e avvia la funzione getInfoFromAPI -->
             <button @click="$emit('search')" class="btn">Cerca</button>
         </div>
     </header>

@@ -28,8 +28,13 @@ export default{
 </script>
 
 <template>
+    <!-- Template della singola card generata per le Serie -->
+
+    <!-- Quando il cursore entra nell'area della card l'immagine sparisce e compaiono le info della serie -->
     <li @mouseenter.prevent="visible = false" @mouseleave.prevent="visible = true" class="series-card">
+        <!-- Locandina della serie(se presente fra le info ricevute dall'API) -->
         <img v-if="series.poster_path !== null && visible === true" :src="'https://image.tmdb.org/t/p/w342' + series.poster_path" :alt="series.name">
+        <!-- Sezione card per le info sulla serie -->
         <div class="info-wrapper-series">
             <h3>
                 <span>Nome serie: </span>

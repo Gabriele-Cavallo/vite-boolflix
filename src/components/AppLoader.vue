@@ -11,6 +11,7 @@ export default {
 </script>
 
 <template>
+    <!-- Banner mostrato all'utente al caricamento della pagina o se le ricerche danno risultato nullo -->
     <section class="loader">
         <div class="container">
             <div class="loader-wrapper">

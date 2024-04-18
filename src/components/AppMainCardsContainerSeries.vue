@@ -15,10 +15,12 @@ import SingleCardSeries from './SingleCardSeries.vue';
 </script>
 
 <template>
+    <!-- Contenitore delle card per le Serie -->
     <section class="cards-container">   
         <div class="container">
             <h2>SERIES</h2>
             <ul class="d-flex d-wrap">
+                <!-- Creo una card per ogni elemento che popola l'array seriesList -->
                 <SingleCardSeries v-for="series in store.seriesList" :key="series.id" :series="series"></SingleCardSeries>
             </ul>
         </div>

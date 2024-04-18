@@ -28,8 +28,13 @@ export default{
 </script>
 
 <template>
+    <!-- Template della singola card generato per i film -->
+
+    <!-- Quando il cursore entra nell'area della card l'immagine sparisce e compaiono le info del film -->
     <li @mouseenter.prevent="visible = false" @mouseleave.prevent="visible = true" class="card">
+        <!-- Locandina del film(se presente fra le info ricevute dall'API) -->
         <img v-if="movie.poster_path !== null && visible === true" :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" :alt="movie.title">
+        <!-- Sezione card per le info sul film -->
         <div class="info-wrapper">
             <h3>
                 <span>Titolo:</span>

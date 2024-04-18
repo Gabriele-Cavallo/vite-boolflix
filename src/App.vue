@@ -19,6 +19,8 @@ export default{
     }
     },
     methods: {
+        // Funzione che esegue al click sul buttone cerca due chiamate all'API per recuperare le informazioni
+        // sia sui film che sulle serie in base all'input dell'utente
         getInfoFromAPI(){
             const queryParams = {
                 api_key: 'ea69b58888f2a2d02844968480d9cddb',
@@ -39,6 +41,8 @@ export default{
                     store.loading = false;
                 })
             }else{
+                // se il campo input è vuoto quando il tasto cerca viene premuto
+                // carica il component AppLoader
                 store.loading = true;
             }
         }
@@ -50,9 +54,14 @@ export default{
 </script>
 
 <template>
+    <!-- Componente figlio di AppVue che scatena l'$emit e richiama la funzione getInfoFromAPI -->
     <AppHeader @search="getInfoFromAPI"></AppHeader>
     <main>
+        <!-- Il loader viene mostrato al primo caricamento della pagina e se entrambi gli array
+        di ricerca sono vuoti -->
         <AppLoader v-if="store.loading == true || store.moviesList.length <= 0  && store.seriesList.length <= 0"></AppLoader>
+        <!-- Se lo stato di AppLoader viene trasformato in false dalla funzione getInfoFromAPI allora
+        vengono mostrate le sezioni dei film e delle serie -->
         <div v-if="store.loading == false">
             <AppMainCardsContainer></AppMainCardsContainer>
             <AppMainCardsContainerSeries></AppMainCardsContainerSeries>
