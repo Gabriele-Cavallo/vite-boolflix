@@ -21,7 +21,15 @@ import SingleCard from './SingleCard.vue';
             <h2>MOVIES</h2>
             <ul class="d-flex d-wrap">
                 <!-- Creo una card per ogni elemento che popola l'array moviesList -->
-                <SingleCard v-for="movie in store.moviesList" :key="movie.id" :movie="movie"></SingleCard>
+                <SingleCard v-for="movie in store.moviesList" :key="movie.id" 
+                :title="movie.title"
+                :originalTitle="movie.original_title"
+                :originalLanguage="movie.original_language"
+                :posterPath="movie.poster_path"
+                :overview="movie.overview"
+                :voteAvarage="movie.vote_average"
+                >
+                </SingleCard>
             </ul>
         </div>
     </section>

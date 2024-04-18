@@ -7,7 +7,12 @@ export default{
         LanguageFlag,
     },
     props: {
-        movie: Object,
+        title: String,
+        originalTitle: String,
+        originalLanguage: String,
+        posterPath: String,
+        overview: String,
+        voteAvarage: Number,
     },
     data(){
         return{
@@ -17,7 +22,7 @@ export default{
     },
     methods: {
         roundedScore(){
-           this.score = Math.ceil(this.movie.vote_average / 2);
+           this.score = Math.ceil(this.voteAvarage / 2);
            return this.score
         }
     },
@@ -33,18 +38,18 @@ export default{
     <!-- Quando il cursore entra nell'area della card l'immagine sparisce e compaiono le info del film -->
     <li @mouseenter.prevent="visible = false" @mouseleave.prevent="visible = true" class="card">
         <!-- Locandina del film(se presente fra le info ricevute dall'API) -->
-        <img v-if="movie.poster_path !== null && visible === true" :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" :alt="movie.title">
+        <img v-if="posterPath !== null && visible === true" :src="'https://image.tmdb.org/t/p/w342' + posterPath" :alt="title">
         <!-- Sezione card per le info sul film -->
         <div class="info-wrapper">
             <h3>
                 <span>Titolo:</span>
-                {{ movie.title }}
+                {{ title }}
             </h3>
             <div>
                 <span>Titolo originale:</span>
-                {{ movie.original_title }}
+                {{ originalTitle }}
             </div>
-            <LanguageFlag :language="movie.original_language"></LanguageFlag>
+            <LanguageFlag :language="originalLanguage"></LanguageFlag>
             <div class="star-point">
                 <span>Voto: </span>
                 <i v-for="star in score" class="fa-solid fa-star"></i>
@@ -52,7 +57,7 @@ export default{
             </div>
             <p>
                 <span>Overview: </span>
-                {{ movie.overview }}
+                {{ overview }}
             </p>
         </div>
     </li>

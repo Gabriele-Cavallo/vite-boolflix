@@ -1,10 +1,10 @@
 <script>
 import { store } from '../store.js';
-import SingleCardSeries from './SingleCardSeries.vue';
+import SingleCard from './SingleCard.vue';
     export default{
         name: 'AppMainCardsContainerSeries',
         components:{
-            SingleCardSeries,
+            SingleCard,
         },
         data(){
             return {
@@ -21,7 +21,15 @@ import SingleCardSeries from './SingleCardSeries.vue';
             <h2>SERIES</h2>
             <ul class="d-flex d-wrap">
                 <!-- Creo una card per ogni elemento che popola l'array seriesList -->
-                <SingleCardSeries v-for="series in store.seriesList" :key="series.id" :series="series"></SingleCardSeries>
+                <SingleCard v-for="series in store.seriesList" :key="series.id" 
+                :title="series.name"
+                :originalTitle="series.original_name"
+                :originalLanguage="series.original_language"
+                :posterPath="series.poster_path"
+                :overview="series.overview"
+                :voteAvarage="series.vote_average"
+                >
+                </SingleCard>
             </ul>
         </div>
     </section>
