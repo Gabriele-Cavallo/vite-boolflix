@@ -52,7 +52,7 @@ export default{
 <template>
     <AppHeader @search="getInfoFromAPI"></AppHeader>
     <main>
-        <AppLoader v-if="store.loading == true"></AppLoader>
+        <AppLoader v-if="store.loading == true || store.moviesList.length <= 0  && store.seriesList.length <= 0"></AppLoader>
         <div v-if="store.loading == false">
             <AppMainCardsContainer></AppMainCardsContainer>
             <AppMainCardsContainerSeries></AppMainCardsContainerSeries>
