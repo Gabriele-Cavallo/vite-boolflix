@@ -11,6 +11,7 @@
 </script>
 
 <template>
+        <!-- Filtro delle categorie film/serie tv -->
         <select @change="$emit('changeGenresId')" v-model="store.filterChoice">
             <option value="" selected>-- MOVIES --</option>
             <option v-for="filter in store.filterMoviesGenres" :value="filter.id">{{ filter.name }}</option>

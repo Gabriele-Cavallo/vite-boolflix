@@ -14,6 +14,7 @@ export default{
         }
     },
     methods:{
+        // Funzione che esegue una chiamata axios e recupera i generi di film e serie tv
         getGenresApi(){
             const queryParams = {
                 api_key: 'ea69b58888f2a2d02844968480d9cddb',
