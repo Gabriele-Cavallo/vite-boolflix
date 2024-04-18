@@ -1,5 +1,7 @@
 <script>
-import LanguageFlag from './LanguageFlag.vue';
+    import { store } from '../store.js';
+    import LanguageFlag from './LanguageFlag.vue';
+    import axios from 'axios';
 
 export default{
     name: 'SingleCard',
@@ -13,18 +15,58 @@ export default{
         posterPath: String,
         overview: String,
         voteAvarage: Number,
+        keyId: Number,
     },
     data(){
         return{
+            store,
             score: null,
             visible: true,
+            actors: [],
+            genres: [],
         }
     },
     methods: {
         roundedScore(){
            this.score = Math.ceil(this.voteAvarage / 2);
            return this.score
-        }
+        },
+        getActorsFromApi(idFilm){
+            if(this.actors.length <= 0){
+                const queryParams = {
+                api_key: 'ea69b58888f2a2d02844968480d9cddb',
+                }
+                axios.get (`https://api.themoviedb.org/3/movie/${idFilm}/credits`, {
+                    params: queryParams
+                })
+                .then((response) => {
+                    for (let i = 0; i < 5; i++) {
+                        this.actors.push(response.data.cast[i].name);
+                    }
+                })
+            }else{
+                this.actors = [];
+            }
+        },
+        getGenresFromApi(idFilm){
+            if(this.genres.length <= 0){
+                const queryParams = {
+                api_key: 'ea69b58888f2a2d02844968480d9cddb',
+                }
+                axios.get (`https://api.themoviedb.org/3/movie/${idFilm}`, {
+                    params: queryParams
+                })
+                .then((response) => {
+                    for (let i = 0; i < 5; i++) {
+                        if(!this.genres.includes(response.data.genres[i].name)){
+                            this.genres.push(response.data.genres[i].name);
+                        }
+                    }
+                })
+            }else{
+                this.genres = [];
+            }
+        },
     },
     mounted(){
         this.roundedScore();
@@ -36,7 +78,7 @@ export default{
     <!-- Template della singola card generato per i film -->
 
     <!-- Quando il cursore entra nell'area della card l'immagine sparisce e compaiono le info del film -->
-    <li @mouseenter.prevent="visible = false" @mouseleave.prevent="visible = true" class="card">
+    <li  @click="getActorsFromApi(keyId), getGenresFromApi(keyId)" @mouseenter.prevent="visible = false" @mouseleave.prevent="visible = true" :class="{'card-overflow' : visible === false}" class="card">
         <!-- Locandina del film(se presente fra le info ricevute dall'API) -->
         <img v-if="posterPath !== null && visible === true" :src="'https://image.tmdb.org/t/p/w342' + posterPath" :alt="title">
         <!-- Sezione card per le info sul film -->
@@ -55,9 +97,14 @@ export default{
                 <i v-for="star in score" class="fa-solid fa-star"></i>
                 <i v-for="star in (5 - score)" class="fa-solid fa-star no-point"></i>
             </div>
+            <p v-if="actors.length > 0">
+                <span>Actors: {{ actors }}</span>
+            </p>
+            <p v-if="genres.length > 0">
+                <span>Genres: {{ genres }}</span>
+            </p>
             <p>
-                <span>Overview: </span>
-                {{ overview }}
+                <span>Overview: {{ overview }}</span>
             </p>
         </div>
     </li>
@@ -100,5 +147,8 @@ export default{
             }
         }
     }
+}
+.card-overflow{
+    overflow-y: auto;
 }
 </style>

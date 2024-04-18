@@ -28,6 +28,7 @@ import SingleCard from './SingleCard.vue';
                 :posterPath="series.poster_path"
                 :overview="series.overview"
                 :voteAvarage="series.vote_average"
+                :keyId="series.id"
                 >
                 </SingleCard>
             </ul>

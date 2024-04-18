@@ -1,6 +1,6 @@
 <script>
-import { store } from '../store.js';
-import SingleCard from './SingleCard.vue';
+    import { store } from '../store.js';
+    import SingleCard from './SingleCard.vue';
     export default{
         name: 'AppMainCardsContainer',
         components:{
@@ -10,7 +10,7 @@ import SingleCard from './SingleCard.vue';
             return {
                 store,
             }
-        }
+        },
     }
 </script>
 
@@ -28,6 +28,7 @@ import SingleCard from './SingleCard.vue';
                 :posterPath="movie.poster_path"
                 :overview="movie.overview"
                 :voteAvarage="movie.vote_average"
+                :keyId="movie.id"
                 >
                 </SingleCard>
             </ul>
