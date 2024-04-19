@@ -62,15 +62,23 @@ export default{
                 <i v-for="star in score" class="fa-solid fa-star"></i>
                 <i v-for="star in (5 - score)" class="fa-solid fa-star no-point"></i>
             </div>
-            <p v-if="showInfo">
-                <span>Actors: {{ store.actors }}</span>
-            </p>
-            <p v-if="showInfo">
-                <span>Genres: {{ store.genres }}</span>
-            </p>
-            <p>
-                <span>Overview: {{ cardInfo.overview }}</span>
-            </p>
+            <div v-if="showInfo">
+                <span>Actors: </span>
+                 {{ store.actors }}
+            </div>
+            <div class="d-flex jst-cntr jst-arnd chevron" v-else>
+                <i class="fa-solid fa-chevron-right"></i>
+                SHOW MORE
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+            <div v-if="showInfo">
+                <span>Genres: </span>
+                 {{ store.genres }}
+            </div>
+            <div>
+                <span>Overview: </span>
+                 {{ cardInfo.overview }}
+            </div>
         </div>
     </li>
 </template>
@@ -109,6 +117,13 @@ export default{
             color: yellow;
             &.no-point{
                 color: grey;
+            }
+        }
+        .chevron{
+            font-weight: bold;
+            i{
+                background-color: #434343;
+                color: white;
             }
         }
     }
