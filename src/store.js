@@ -8,4 +8,6 @@ export const store = reactive({
     filterMoviesGenres: '',
     filterSeriesGenres: '',
     filterChoice: '',
+    actors: [],
+    genres: [],
 });

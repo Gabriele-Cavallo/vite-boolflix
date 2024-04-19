@@ -31,13 +31,13 @@ export default{
                     params: queryParams
                 })
                 .then((response) => {
-                    this.store.moviesList = response.data.results;
+                    store.moviesList = response.data.results;
                 })
                 axios.get ('https://api.themoviedb.org/3/search/tv', {
                     params: queryParams
                 })
                 .then((response) => {
-                    this.store.seriesList = response.data.results;
+                    store.seriesList = response.data.results;
                     store.loading = false;
                 })
             }else{

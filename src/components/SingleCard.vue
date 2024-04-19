@@ -1,7 +1,6 @@
 <script>
     import { store } from '../store.js';
     import LanguageFlag from './LanguageFlag.vue';
-    import axios from 'axios';
 
 export default{
     name: 'SingleCard',
@@ -11,8 +10,6 @@ export default{
     props: {
         title: String,
         originalTitle: String,
-        keyId: Number,
-        genresId: Array,
         cardInfo: Object,
     },
     data(){
@@ -20,8 +17,7 @@ export default{
             store,
             score: null,
             visible: true,
-            actors: [],
-            genres: [],
+            showInfo: false,
         }
     },
     methods: {
@@ -31,43 +27,8 @@ export default{
            this.score = Math.ceil(this.cardInfo.vote_average / 2);
            return this.score
         },
-        // Funzione che tramite chiamata axios recupera le informazioni del cast dei film
-        getActorsFromApi(idFilm){
-            if(this.actors.length <= 0){
-                const queryParams = {
-                api_key: 'ea69b58888f2a2d02844968480d9cddb',
-                }
-                axios.get (`https://api.themoviedb.org/3/movie/${idFilm}/credits`, {
-                    params: queryParams
-                })
-                .then((response) => {
-                    for (let i = 0; i < 5; i++) {
-                        this.actors.push(response.data.cast[i].name);
-                    }
-                })
-            }else{
-                this.actors = [];
-            }
-        },
-        // Funzione che tramite chiamata axios recupera le informazioni dei generi dei film
-        getGenresFromApi(idFilm){
-            if(this.genres.length <= 0){
-                const queryParams = {
-                api_key: 'ea69b58888f2a2d02844968480d9cddb',
-                }
-                axios.get (`https://api.themoviedb.org/3/movie/${idFilm}`, {
-                    params: queryParams
-                })
-                .then((response) => {
-                    for (let i = 0; i < 5; i++) {
-                        if(!this.genres.includes(response.data.genres[i].name)){
-                            this.genres.push(response.data.genres[i].name);
-                        }
-                    }
-                })
-            }else{
-                this.genres = [];
-            }
+        toggleInfo(){
+            this.showInfo = !this.showInfo;
         },
     },
     mounted(){
@@ -82,7 +43,7 @@ export default{
     <!-- Le card vengono mostrate solo quando l'id corrisponde a quello della categoria selezionata oppure
     quando non è selezionata nessuna categoria ed è solo l'input utente a regolare le card visualizzate -->
     <!-- Quando il cursore entra nell'area della card l'immagine sparisce e compaiono le info del film -->
-    <li v-if="genresId.includes(store.filterChoice) || store.filterChoice === ''"  @click="getActorsFromApi(keyId), getGenresFromApi(keyId)" @mouseenter.prevent="visible = false" @mouseleave.prevent="visible = true" :class="{'card-overflow' : visible === false}" class="card">
+    <li @click="toggleInfo" v-if="cardInfo.genre_ids.includes(store.filterChoice) || store.filterChoice === ''" @mouseenter.prevent="visible = false" @mouseleave.prevent="visible = true" :class="{'card-overflow' : visible === false}" class="card">
         <!-- Locandina del film(se presente fra le info ricevute dall'API) -->
         <img v-if="cardInfo.poster_path !== null && visible === true" :src="'https://image.tmdb.org/t/p/w342' + cardInfo.poster_path" :alt="title">
         <!-- Sezione card per le info sul film -->
@@ -101,11 +62,11 @@ export default{
                 <i v-for="star in score" class="fa-solid fa-star"></i>
                 <i v-for="star in (5 - score)" class="fa-solid fa-star no-point"></i>
             </div>
-            <p v-if="actors.length > 0">
-                <span>Actors: {{ actors }}</span>
+            <p v-if="showInfo">
+                <span>Actors: {{ store.actors }}</span>
             </p>
-            <p v-if="genres.length > 0">
-                <span>Genres: {{ genres }}</span>
+            <p v-if="showInfo">
+                <span>Genres: {{ store.genres }}</span>
             </p>
             <p>
                 <span>Overview: {{ cardInfo.overview }}</span>
