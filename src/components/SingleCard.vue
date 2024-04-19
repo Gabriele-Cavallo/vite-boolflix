@@ -11,12 +11,9 @@ export default{
     props: {
         title: String,
         originalTitle: String,
-        originalLanguage: String,
-        posterPath: String,
-        overview: String,
-        voteAvarage: Number,
         keyId: Number,
         genresId: Array,
+        cardInfo: Object,
     },
     data(){
         return{
@@ -31,7 +28,7 @@ export default{
         // Funzione che legge il vote_avarage di film/serie tv su scala 1 a 10
         // e ritorna il punteggio arrotondato per eccesso su scala 1 a 5
         roundedScore(){
-           this.score = Math.ceil(this.voteAvarage / 2);
+           this.score = Math.ceil(this.cardInfo.vote_average / 2);
            return this.score
         },
         // Funzione che tramite chiamata axios recupera le informazioni del cast dei film
@@ -87,7 +84,7 @@ export default{
     <!-- Quando il cursore entra nell'area della card l'immagine sparisce e compaiono le info del film -->
     <li v-if="genresId.includes(store.filterChoice) || store.filterChoice === ''"  @click="getActorsFromApi(keyId), getGenresFromApi(keyId)" @mouseenter.prevent="visible = false" @mouseleave.prevent="visible = true" :class="{'card-overflow' : visible === false}" class="card">
         <!-- Locandina del film(se presente fra le info ricevute dall'API) -->
-        <img v-if="posterPath !== null && visible === true" :src="'https://image.tmdb.org/t/p/w342' + posterPath" :alt="title">
+        <img v-if="cardInfo.poster_path !== null && visible === true" :src="'https://image.tmdb.org/t/p/w342' + cardInfo.poster_path" :alt="title">
         <!-- Sezione card per le info sul film -->
         <div class="info-wrapper">
             <h3>
@@ -98,7 +95,7 @@ export default{
                 <span>Titolo originale:</span>
                 {{ originalTitle }}
             </div>
-            <LanguageFlag :language="originalLanguage"></LanguageFlag>
+            <LanguageFlag :language="cardInfo.original_language"></LanguageFlag>
             <div class="star-point">
                 <span>Voto: </span>
                 <i v-for="star in score" class="fa-solid fa-star"></i>
@@ -111,7 +108,7 @@ export default{
                 <span>Genres: {{ genres }}</span>
             </p>
             <p>
-                <span>Overview: {{ overview }}</span>
+                <span>Overview: {{ cardInfo.overview }}</span>
             </p>
         </div>
     </li>

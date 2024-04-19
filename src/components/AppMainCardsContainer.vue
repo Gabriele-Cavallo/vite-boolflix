@@ -24,12 +24,9 @@
                 <SingleCard v-for="movie in store.moviesList" :key="movie.id" 
                 :title="movie.title"
                 :originalTitle="movie.original_title"
-                :originalLanguage="movie.original_language"
-                :posterPath="movie.poster_path"
-                :overview="movie.overview"
-                :voteAvarage="movie.vote_average"
                 :keyId="movie.id"
                 :genresId="movie.genre_ids"
+                :cardInfo="movie"
                 >
                 </SingleCard>
             </ul>

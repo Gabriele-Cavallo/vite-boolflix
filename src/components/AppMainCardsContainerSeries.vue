@@ -24,12 +24,10 @@ import SingleCard from './SingleCard.vue';
                 <SingleCard v-for="series in store.seriesList" :key="series.id" 
                 :title="series.name"
                 :originalTitle="series.original_name"
-                :originalLanguage="series.original_language"
-                :posterPath="series.poster_path"
-                :overview="series.overview"
-                :voteAvarage="series.vote_average"
                 :keyId="series.id"
                 :genresId="series.genre_ids"
+                :cardInfo="series"
+
                 >
                 </SingleCard>
             </ul>
