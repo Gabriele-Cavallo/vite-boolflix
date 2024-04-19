@@ -27,6 +27,7 @@ export default{
            this.score = Math.ceil(this.cardInfo.vote_average / 2);
            return this.score
         },
+        // Funzione che regola la visualizzazione dei dati actors e genres
         toggleInfo(){
             this.showInfo = !this.showInfo;
         },
@@ -40,8 +41,9 @@ export default{
 <template>
     <!-- Template della singola card generato per i film -->
 
-    <!-- Le card vengono mostrate solo quando l'id corrisponde a quello della categoria selezionata oppure
-    quando non è selezionata nessuna categoria ed è solo l'input utente a regolare le card visualizzate -->
+    <!-- Le card vengono mostrate solo quando i loro id di genere corrispondono a quello della categoria 
+        selezionata oppure quando non è selezionata nessuna categoria ed è solo l'input utente a 
+        regolare le card visualizzate -->
     <!-- Quando il cursore entra nell'area della card l'immagine sparisce e compaiono le info del film -->
     <li @click="toggleInfo" v-if="cardInfo.genre_ids.includes(store.filterChoice) || store.filterChoice === ''" @mouseenter.prevent="visible = false" @mouseleave.prevent="visible = true" :class="{'card-overflow' : visible === false}" class="card">
         <!-- Locandina del film(se presente fra le info ricevute dall'API) -->
@@ -62,11 +64,12 @@ export default{
                 <i v-for="star in score" class="fa-solid fa-star"></i>
                 <i v-for="star in (5 - score)" class="fa-solid fa-star no-point"></i>
             </div>
+            <!-- Sezione a scomparsa dei dati su attori e generi -->
             <div v-if="showInfo">
                 <span>Actors: </span>
                  {{ store.actors }}
             </div>
-            <div class="d-flex jst-cntr jst-arnd chevron" v-else>
+            <div v-else class="d-flex jst-cntr jst-arnd chevron">
                 <i class="fa-solid fa-chevron-right"></i>
                 SHOW MORE
                 <i class="fa-solid fa-chevron-left"></i>
@@ -75,6 +78,7 @@ export default{
                 <span>Genres: </span>
                  {{ store.genres }}
             </div>
+            <!-- /Sezione a scomparsa dei dati su attori e generi -->
             <div>
                 <span>Overview: </span>
                  {{ cardInfo.overview }}
